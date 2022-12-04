@@ -5,5 +5,14 @@
 
 ### 環境構築
 
-- npm install
-- node index.js
+1. パッケージのインストール
+
+```
+npm install
+```
+
+2. ルートディレクトリで実行
+
+```
+node index.js
+```
