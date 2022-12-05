@@ -22,3 +22,18 @@ exports.create = async (message, checked) => {
     throw e;
   }
 };
+
+exports.update = async (id, checked) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) throw new Error("invaild memo id");
+
+  try {
+    const memo = await model.memo.findOneAndUpdate(
+      { _id: new mongoose.Types.ObjectId(id) },
+      { $set: { checked } },
+      { upsert: false }
+    );
+    if (memo === null) throw new Error("memo not found");
+  } catch (e) {
+    throw e;
+  }
+};

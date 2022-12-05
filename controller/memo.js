@@ -5,7 +5,9 @@ exports.getAll = async (req, res, next) => {
     const memos = await usecase.memo.getAll();
     return res.status(200).send({ memos });
   } catch (e) {
-    return res.status(500).send({ error: String(e), message: "error occured" });
+    return res
+      .status(500)
+      .send({ error: String(e), message: "error occurred" });
   }
 };
 
@@ -16,6 +18,21 @@ exports.create = async (req, res, next) => {
     await usecase.memo.create(message, checked);
     return res.status(200).send({});
   } catch (e) {
-    return res.status(500).send({ error: String(e), message: "error occured" });
+    return res
+      .status(500)
+      .send({ error: String(e), message: "error occurred" });
+  }
+};
+
+exports.update = async (req, res, next) => {
+  const id = req.params.id;
+  const checked = req.body.checked;
+  try {
+    await usecase.memo.update(id, checked);
+    return res.status(200).send({});
+  } catch (e) {
+    return res
+      .status(500)
+      .send({ error: String(e), message: "error occurred" });
   }
 };
