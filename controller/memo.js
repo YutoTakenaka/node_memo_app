@@ -36,3 +36,15 @@ exports.update = async (req, res, next) => {
       .send({ error: String(e), message: "error occurred" });
   }
 };
+
+exports.delete = async (req, res, next) => {
+  const id = req.query.id;
+  try {
+    await usecase.memo.delete(id);
+    return res.status(200).send({});
+  } catch (e) {
+    return res
+      .status(500)
+      .send({ error: String(e), message: "error occurred" });
+  }
+};
