@@ -1,11 +1,21 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 3000;
+const morgan = require("morgan");
+const controller = require("./controller");
+const mongoose = require("mongoose");
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "hello world",
-  });
+app.use(cors());
+app.use(express.json());
+
+app.use(morgan("common"));
+
+app.use("/memo", controller.memo());
+
+mongoose.connect("mongodb://localhost:27017/nodeMemoApp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 app.listen(port, () => {
